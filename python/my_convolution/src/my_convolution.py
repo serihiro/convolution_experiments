@@ -10,26 +10,27 @@ def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: i
     """Convolution implementation using Numpy.
 
     Args:
-        x (numpy.ndarray): Input image whose shape consists of `n`, `c_i`, `h`, and `w`
-                         where `n` is the size of batch, `c_i` is the size of input channel,
-                         `h` is the size of height of the image,
-                         and `w` is the size of width of the image.
-        W (numpy.ndarray): Kernel whose shape consists of `c_o`, `c_i`, `h`, and `w`
-                         where `c_o` is the size of output channel, `c_i` is the size of
-                         input channel, `h` is the size of height of the kernel,
-                         and `w` is the size of width of the kernel.
+        x (numpy.ndarray): Input image whose shape consists of ``n``, ``c_i``, ``h``, and ``w``,
+                         where ``n`` is the size of batch, ``c_i`` is the size of input channel,
+                         ``h`` is the size of height of the image,
+                         and ``w`` is the size of width of the image.
+        W (numpy.ndarray): Kernel whose shape consists of ``c_o``, ``c_i``, ``h``, and ``w``,
+                         where ``c_o`` is the size of output channel, ``c_i`` is the size of
+                         input channel, ``h`` is the size of height of the kernel,
+                         and ``w`` is the size of width of the kernel.
 
-        stride (int): stride size. The default value is `1`.
-        pad (int): padding size. The default value is  `0`.
+        stride (int): stride size. The default value is ``1``.
+        pad (int): padding size. The default value is  ``0``.
 
     Returns:
-        numpy.nadarray: ndarray object whose shape consists of `n`, `c_o`,
-        `h_o`, `w_o`, where `h_o` is
-        the result of `math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1`,
-        and `w_o` is the result of `math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1`.
+        numpy.nadarray: ndarray object whose shape consists of ``n``, ``c_o``,
+        ``h_o``, ``w_o``, where ``h_o`` is
+        the result of ``math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1``,
+        and `w_o` is the result of ``math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1``.
 
     Raises:
-        AssertionError: If
+        AssertionError: If ``h_k > h_i or w_k > w_i`` or \
+        ``stride > (h_i - h_k + 2 * pad + 1) or stride > (w_i - w_k + 2 * pad + 1)``
 
     """
     n, c_i, h_i, w_i = x.shape

@@ -1,4 +1,4 @@
-.PHONY: lint
+.PHONY: lint docs
 
 lint:
 	flake8
@@ -6,3 +6,6 @@ lint:
 
 all:
 	@make lint
+
+docs:
+	sphinx-build -b singlehtml ./my_convolution/docs ./my_convolution/docs/_build
