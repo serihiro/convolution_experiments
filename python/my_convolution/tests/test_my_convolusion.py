@@ -1,6 +1,7 @@
 import numpy as np
 from chainer.functions.connection.convolution_2d import convolution_2d
 from my_convolution.src.my_convolution import convolution_with_numpy
+from numpy.testing import assert_array_equal
 
 
 class TestConvolusionWithNumpy(object):
@@ -34,7 +35,7 @@ class TestConvolusionWithNumpy(object):
         expected = convolution_2d(x, W, stride=2).data
         actual = convolution_with_numpy(x, W, stride=2)
 
-        assert np.all(np.equal(expected, actual)) == True  # NOQA
+        assert_array_equal(expected, actual)
 
     def test_with_stride_3(self):
         n = 1
@@ -50,4 +51,4 @@ class TestConvolusionWithNumpy(object):
         expected = convolution_2d(x, W, stride=3).data
         actual = convolution_with_numpy(x, W, stride=3)
 
-        assert np.all(np.equal(expected, actual)) == True  # NOQA
+        assert_array_equal(expected, actual)
