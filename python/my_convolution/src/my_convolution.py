@@ -1,11 +1,37 @@
+"""My convolution implementations."""
+
 import math
 
 import numpy as np
 
 
-# x: NCHW
-# W: C_oC_iHW
-def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: int = 0):
+def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: int = 0) \
+        -> np.ndarray:
+    """Convolution implementation using Numpy.
+
+    Args:
+        x (numpy.ndarray): Input image whose shape consists of `n`, `c_i`, `h`, and `w`
+                         where `n` is the size of batch, `c_i` is the size of input channel,
+                         `h` is the size of height of the image,
+                         and `w` is the size of width of the image.
+        W (numpy.ndarray): Kernel whose shape consists of `c_o`, `c_i`, `h`, and `w`
+                         where `c_o` is the size of output channel, `c_i` is the size of
+                         input channel, `h` is the size of height of the kernel,
+                         and `w` is the size of width of the kernel.
+
+        stride (int): stride size. The default value is `1`.
+        pad (int): padding size. The default value is  `0`.
+
+    Returns:
+        numpy.nadarray: ndarray object whose shape consists of `n`, `c_o`,
+        `h_o`, `w_o`, where `h_o` is
+        the result of `math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1`,
+        and `w_o` is the result of `math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1`.
+
+    Raises:
+        AssertionError: If
+
+    """
     n, c_i, h_i, w_i = x.shape
     c_o, c_i, h_k, w_k = W.shape
 
