@@ -7,6 +7,79 @@ import numpy as np
 INITIAL_VALUE = 0.0
 
 
+def pad_tensor(x: list, n: int, c_i: int, h_i: int, w_i: int, pad: int) -> None:
+    """Pad elements to the tensor.
+
+    Args:
+        x (list):
+        n (int):
+        c_i (int):
+        h_i (int):
+        w_i (int):
+        pad (int):
+
+    Returns:
+        None
+
+    """
+    for nn in range(n):
+        for cc_i in range(c_i):
+
+            for pp in range(pad):
+                x[nn][cc_i].insert(pp,
+                                   [INITIAL_VALUE for _i in range(w_i + 2 * pad)])
+                x[nn][cc_i].insert(h_i + pp + 1,
+                                   [INITIAL_VALUE for _i in range(w_i + 2 * pad)])
+
+            for hh_i in range(1, h_i + pad):
+                for pp in range(pad):
+                    x[nn][cc_i][hh_i].insert(pp, INITIAL_VALUE)
+                    x[nn][cc_i][hh_i].insert(w_i + pp + 1, INITIAL_VALUE)
+
+
+def im2col(x: list, h_k: int, w_k: int, pad: int = 0, stride: int = 1) -> list:
+    """Convert the tensor to a vector.
+
+    Args:
+        x (list):
+        h_k (int):
+        w_k (int):
+        pad (int):
+        stride (int):
+
+    Returns:
+        list
+
+    """
+    n = len(x)
+    c_i = len(x[0])
+    h_i = len(x[0][0])
+    w_i = len(x[0][0][0])
+    h_o = math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1
+    w_o = math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1
+
+    if pad > 0:
+        pad_tensor(x, n, c_i, h_i, w_i, pad)
+
+    result = [[[[[[INITIAL_VALUE for _i in range(w_o)]
+                  for _j in range(h_o)]
+                 for _k in range(h_k)]
+                for _l in range(w_k)]
+               for _m in range(c_i)]
+              for _n in range(n)]
+
+    for nn in range(n):
+        for cc_i in range(c_i):
+            for hh_o in range(h_o):
+                for ww_o in range(w_o):
+                    for hh_k in range(h_k):
+                        for ww_k in range(w_k):
+                            result[nn][cc_i][hh_k][ww_k][hh_o][ww_o] = \
+                                x[nn][cc_i][hh_o * stride + hh_k][ww_o * stride + ww_k]
+
+    return result
+
+
 def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: int = 0) \
         -> np.ndarray:
     r"""Convolution implementation using Numpy.
@@ -108,8 +181,6 @@ def convolution_with_standard_library(x: list, W: list, stride: int = 1, pad: in
     h_k = len(W[0][0])
     w_k = len(W[0][0][0])
 
-    print(type(x), type(W))
-
     if h_k > h_i or w_k > w_i:
         raise AssertionError('The height and width of x must be smaller than W')
 
@@ -120,19 +191,7 @@ def convolution_with_standard_library(x: list, W: list, stride: int = 1, pad: in
     w_o = math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1
 
     if pad > 0:
-        for nn in range(n):
-            for cc_i in range(c_i):
-
-                for pp in range(pad):
-                    x[nn][cc_i].insert(pp,
-                                       [INITIAL_VALUE for _i in range(w_i + 2 * pad)])
-                    x[nn][cc_i].insert(h_i + pp + 1,
-                                       [INITIAL_VALUE for _i in range(w_i + 2 * pad)])
-
-                for hh_i in range(1, h_i + pad):
-                    for pp in range(pad):
-                        x[nn][cc_i][hh_i].insert(pp, INITIAL_VALUE)
-                        x[nn][cc_i][hh_i].insert(w_i + pp + 1, INITIAL_VALUE)
+        pad_tensor(x, n, c_i, h_i, w_i, pad)
 
     result = [[[[INITIAL_VALUE for _i in range(w_o)]
                 for _j in range(h_o)]

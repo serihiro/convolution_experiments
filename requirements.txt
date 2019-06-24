@@ -11,6 +11,7 @@ protobuf==3.7.1
 py==1.8.0
 pyparsing==2.4.0
 pytest==4.6.3
+pytest-cov==2.7.1
 six==1.12.0
 typing==3.6.6
 typing-extensions==3.6.6
