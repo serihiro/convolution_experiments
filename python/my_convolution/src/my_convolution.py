@@ -210,3 +210,38 @@ def convolution_with_standard_library(x: list, W: list, stride: int = 1, pad: in
                                     W[cc_o][cc_i][k_h][k_w]
 
     return result
+
+
+def convolution_with_im2col(x: list, W: list, stride: int = 1, pad: int = 0) \
+        -> list:
+    n = len(x)
+    c_i = len(x[0])
+    h_i = len(x[0][0])
+    w_i = len(x[0][0][0])
+
+    c_o = len(W)
+    c_i = len(W[0])
+    h_k = len(W[0][0])
+    w_k = len(W[0][0][0])
+
+    if h_k > h_i or w_k > w_i:
+        raise AssertionError('The height and width of x must be smaller than W')
+
+    if stride > (h_i - h_k + 2 * pad + 1) or stride > (w_i - w_k + 2 * pad + 1):
+        raise AssertionError('The value of stride must be smaller than output tensor size')
+
+    h_o = math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1
+    w_o = math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1
+
+    if pad > 0:
+        pad_tensor(x, n, c_i, h_i, w_i, pad)
+
+    result = [[[[INITIAL_VALUE for _i in range(w_o)]
+                for _j in range(h_o)]
+               for _k in range(c_o)]
+              for _h in range(n)]
+
+    col = im2col(x, h_k, w_k, pad, stride)
+
+
+    return result
