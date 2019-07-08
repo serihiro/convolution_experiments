@@ -21,7 +21,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -40,7 +40,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -59,7 +59,7 @@ class TestConvolutionWithIm2col:
         stride = 2
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -78,10 +78,11 @@ class TestConvolutionWithIm2col:
         stride = 3
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
+
     def test_with_stride_4(self):
         n = 1
         c_i = 1
@@ -96,7 +97,7 @@ class TestConvolutionWithIm2col:
         stride = 4
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -115,7 +116,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 1
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -134,7 +135,7 @@ class TestConvolutionWithIm2col:
         stride = 3
         pad = 1
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -153,7 +154,7 @@ class TestConvolutionWithIm2col:
         stride = 3
         pad = 2
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -172,7 +173,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -191,7 +192,7 @@ class TestConvolutionWithIm2col:
         stride = 3
         pad = 1
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -210,7 +211,7 @@ class TestConvolutionWithIm2col:
         stride = 3
         pad = 2
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -229,7 +230,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -248,7 +249,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -267,7 +268,7 @@ class TestConvolutionWithIm2col:
         stride = 2
         pad = 2
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -286,7 +287,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -305,7 +306,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -324,7 +325,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -343,7 +344,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -362,7 +363,7 @@ class TestConvolutionWithIm2col:
         stride = 1
         pad = 0
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
@@ -381,7 +382,7 @@ class TestConvolutionWithIm2col:
         stride = 3
         pad = 5
 
-        expected = convolution_2d(x, W).data.tolist()
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
         actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)

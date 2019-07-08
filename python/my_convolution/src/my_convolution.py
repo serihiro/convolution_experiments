@@ -3,15 +3,17 @@
 import math
 
 import numpy as np
+from typing import List
 
 INITIAL_VALUE = 0.0
 
 
-def pad_tensor(x: list, n: int, c_i: int, h_i: int, w_i: int, pad: int) -> None:
+def pad_tensor(x: List[List[List[List[float]]]], n: int, c_i: int, h_i: int, w_i: int,
+               pad: int) -> None:
     """Pad elements to the tensor.
 
     Args:
-        x (list):
+        x (List[List[List[List[float]]]]):
         n (int):
         c_i (int):
         h_i (int):
@@ -37,18 +39,19 @@ def pad_tensor(x: list, n: int, c_i: int, h_i: int, w_i: int, pad: int) -> None:
                     x[nn][cc_i][hh_i].insert(w_i + pp + 1, INITIAL_VALUE)
 
 
-def im2col(x: list, h_k: int, w_k: int, pad: int = 0, stride: int = 1) -> list:
+def im2col(x: List[List[List[List[float]]]], h_k: int, w_k: int, pad: int = 0, stride: int = 1) \
+        -> List[List[List[List[List[List[float]]]]]]:
     """Convert the tensor to a vector.
 
     Args:
-        x (list):
+        x (List[List[List[List[float]]]]):
         h_k (int):
         w_k (int):
         pad (int):
         stride (int):
 
     Returns:
-        list
+        List[List[List[List[List[List[float]]]]]]
 
     """
     n = len(x)
@@ -86,13 +89,13 @@ def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: i
 
     Args:
         x (numpy.ndarray): Input image whose shape consists of ``n``, ``c_i``, ``h``, and ``w``,
-                         where ``n`` is the size of batch, ``c_i`` is the size of input channel,
-                         ``h`` is the size of height of the image,
-                         and ``w`` is the size of width of the image.
+          where ``n`` is the size of batch, ``c_i`` is the size of input channel,
+          ``h`` is the size of height of the image,
+          and ``w`` is the size of width of the image.
         W (numpy.ndarray): Kernel whose shape consists of ``c_o``, ``c_i``, ``h``, and ``w``,
-                         where ``c_o`` is the size of output channel, ``c_i`` is the size of
-                         input channel, ``h`` is the size of height of the kernel,
-                         and ``w`` is the size of width of the kernel.
+          where ``c_o`` is the size of output channel, ``c_i`` is the size of
+          input channel, ``h`` is the size of height of the kernel,
+          and ``w`` is the size of width of the kernel.
 
         stride (int): stride size. The default value is ``1``.
         pad (int): padding size. The default value is  ``0``.
@@ -104,8 +107,8 @@ def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: i
         and `w_o` is the result of ``math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1``.
 
     Raises:
-        AssertionError: If ``h_k > h_i or w_k > w_i`` or \
-        ``stride > (h_i - h_k + 2 * pad + 1) or stride > (w_i - w_k + 2 * pad + 1)``
+        AssertionError: If ``h_k > h_i or w_k > w_i`` or
+          ``stride > (h_i - h_k + 2 * pad + 1)`` or ``stride > (w_i - w_k + 2 * pad + 1)``
 
     """
     n, c_i, h_i, w_i = x.shape
@@ -143,32 +146,35 @@ def convolution_with_numpy(x: np.ndarray, W: np.ndarray, stride: int = 1, pad: i
     return result
 
 
-def convolution_with_standard_library(x: list, W: list, stride: int = 1, pad: int = 0) \
-        -> list:
+def convolution_with_standard_library(x: List[List[List[List[float]]]],
+                                      W: List[List[List[List[float]]]], stride: int = 1,
+                                      pad: int = 0) \
+        -> List[List[List[List[float]]]]:
     r"""Convolution implementation using only Python standard library.
 
     Args:
-        x (list): Input image whose shape consists of ``n``, ``c_i``, ``h``, and ``w``,
-                         where ``n`` is the size of batch, ``c_i`` is the size of input channel,
-                         ``h`` is the size of height of the image,
-                         and ``w`` is the size of width of the image.
-        W (list): Kernel whose shape consists of ``c_o``, ``c_i``, ``h``, and ``w``,
-                         where ``c_o`` is the size of output channel, ``c_i`` is the size of
-                         input channel, ``h`` is the size of height of the kernel,
-                         and ``w`` is the size of width of the kernel.
+        x (List[List[List[List[float]]]]): Input image whose shape consists of ``n``, ``c_i``,
+          ``h``, and ``w``,
+          where ``n`` is the size of batch, ``c_i`` is the size of input channel,
+          ``h`` is the size of height of the image,
+          and ``w`` is the size of width of the image.
+        W (List[List[List[List[float]]]]): Kernel whose shape consists of ``c_o``, ``c_i``, ``h``,
+          and ``w``, where ``c_o`` is the size of output channel, ``c_i`` is the size of
+          input channel, ``h`` is the size of height of the kernel,
+          and ``w`` is the size of width of the kernel.
 
         stride (int): stride size. The default value is ``1``.
         pad (int): padding size. The default value is  ``0``.
 
     Returns:
-        list: list object whose shape consists of ``n``, ``c_o``,
+        List[List[List[List[float]]]]: list object whose shape consists of ``n``, ``c_o``,
         ``h_o``, ``w_o``, where ``h_o`` is
         the result of ``math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1``,
         and `w_o` is the result of ``math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1``.
 
     Raises:
-        AssertionError: If ``h_k > h_i or w_k > w_i`` or \
-        ``stride > (h_i - h_k + 2 * pad + 1) or stride > (w_i - w_k + 2 * pad + 1)``
+        AssertionError: If ``h_k > h_i or w_k > w_i`` or
+          ``stride > (h_i - h_k + 2 * pad + 1)`` or ``stride > (w_i - w_k + 2 * pad + 1)``
 
     """
     n = len(x)
@@ -212,8 +218,36 @@ def convolution_with_standard_library(x: list, W: list, stride: int = 1, pad: in
     return result
 
 
-def convolution_with_im2col(x: list, W: list, stride: int = 1, pad: int = 0) \
-        -> list:
+def convolution_with_im2col(x: List[List[List[List[float]]]], W: List[List[List[List[float]]]],
+                            stride: int = 1, pad: int = 0) \
+        -> List[List[List[List[float]]]]:
+    r"""Convolution implementation with im2col.
+
+    Args:
+        x (List[List[List[List[float]]]]): Input image whose shape consists of ``n``, ``c_i``,
+          ``h``, and ``w``,
+        where ``n`` is the size of batch, ``c_i`` is the size of input channel,
+          ``h`` is the size of height of the image,
+          and ``w`` is the size of width of the image.
+        W (List[List[List[List[float]]]]): Kernel whose shape consists of ``c_o``, ``c_i``, ``h``,
+          and ``w``, where ``c_o`` is the size of output channel, ``c_i`` is the size of
+          input channel, ``h`` is the size of height of the kernel, and ``w`` is the size of width
+          of the kernel.
+
+        stride (int): stride size. The default value is ``1``.
+        pad (int): padding size. The default value is  ``0``.
+
+    Returns:
+        list: list object whose shape consists of ``n``, ``c_o``,
+        ``h_o``, ``w_o``, where ``h_o`` is
+        the result of ``math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1``,
+        and `w_o` is the result of ``math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1``.
+
+    Raises:
+        AssertionError: If ``h_k > h_i or w_k > w_i`` or ``stride > (h_i - h_k + 2 * pad + 1)``
+          or ``stride > (w_i - w_k + 2 * pad + 1)``
+
+    """
     n = len(x)
     c_i = len(x[0])
     h_i = len(x[0][0])
@@ -233,15 +267,22 @@ def convolution_with_im2col(x: list, W: list, stride: int = 1, pad: int = 0) \
     h_o = math.floor((h_i - h_k + 2 * pad) / float(stride)) + 1
     w_o = math.floor((w_i - w_k + 2 * pad) / float(stride)) + 1
 
-    if pad > 0:
-        pad_tensor(x, n, c_i, h_i, w_i, pad)
-
     result = [[[[INITIAL_VALUE for _i in range(w_o)]
                 for _j in range(h_o)]
                for _k in range(c_o)]
               for _h in range(n)]
 
-    col = im2col(x, h_k, w_k, pad, stride)
+    col = im2col(x=x, h_k=h_k, w_k=w_k, pad=pad, stride=stride)
 
+    for nn in range(n):
+        for cc_i in range(c_i):
+            for cc_o in range(c_o):
+                for hh_k in range(h_k):
+                    for ww_k in range(w_k):
+                        for hh_o in range(h_o):
+                            for ww_o in range(w_o):
+                                result[nn][cc_o][hh_o][ww_o] += \
+                                    col[nn][cc_i][hh_k][ww_k][hh_o][ww_o] * \
+                                    W[cc_o][cc_i][hh_k][ww_k]
 
     return result
