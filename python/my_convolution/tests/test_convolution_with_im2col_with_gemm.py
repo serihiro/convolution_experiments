@@ -1,12 +1,13 @@
 import math
 
 import numpy as np
+import time
 import pytest
 from chainer.functions.connection.convolution_2d import convolution_2d
-from my_convolution.src.my_convolution import convolution_with_standard_library
+from my_convolution.src.my_convolution import convolution_with_im2col_and_gemm
 
 
-class TestConvolutionWithStandardLibrary:
+class TestConvolutionWithIm2colWithGemm:
     def test_basis(self):
         n = 1
         c_i = 1
@@ -21,8 +22,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -40,8 +41,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -59,8 +60,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 2
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -78,8 +79,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 3
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -97,8 +98,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 4
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -116,8 +117,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 1
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -135,8 +136,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 3
         pad = 1
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -154,8 +155,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 3
         pad = 2
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -173,8 +174,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -192,8 +193,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 3
         pad = 1
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -211,8 +212,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 3
         pad = 2
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -230,8 +231,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -249,8 +250,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -268,8 +269,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 2
         pad = 2
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -287,8 +288,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -306,8 +307,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -325,8 +326,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -344,8 +345,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -363,8 +364,8 @@ class TestConvolutionWithStandardLibrary:
         stride = 1
         pad = 0
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -382,12 +383,12 @@ class TestConvolutionWithStandardLibrary:
         stride = 3
         pad = 5
 
-        expected = list(convolution_2d(x, W, stride=stride, pad=pad).data)
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
-    # 49.27 sec
+    # 25.02
     def test_with_c_o_64_c_i_3_n_1_stride_1_and_padding_1(self):
         n = 1
         c_i = 3
@@ -403,7 +404,7 @@ class TestConvolutionWithStandardLibrary:
         pad = 1
 
         expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
-        actual = convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+        actual = convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
@@ -419,7 +420,7 @@ class TestConvolutionWithStandardLibrary:
         W = np.full(c_o * c_i * h_k * w_k, 2).reshape(c_o, c_i, h_k, w_k).astype(np.float32)
 
         with pytest.raises(AssertionError):
-            convolution_with_standard_library(x.tolist(), W.tolist())
+            convolution_with_im2col_and_gemm(x.tolist(), W.tolist())
 
     def test_assertion_error_with_too_large_stride(self):
         n = 1
@@ -436,7 +437,7 @@ class TestConvolutionWithStandardLibrary:
         stride = 5  # > h_i - h_k + 2 * pad + 1
 
         with pytest.raises(AssertionError):
-            convolution_with_standard_library(x.tolist(), W.tolist(), stride=stride, pad=pad)
+            convolution_with_im2col_and_gemm(x.tolist(), W.tolist(), stride=stride, pad=pad)
 
     @staticmethod
     def __assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride):

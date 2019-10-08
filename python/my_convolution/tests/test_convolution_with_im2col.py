@@ -387,6 +387,26 @@ class TestConvolutionWithIm2col:
 
         self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
 
+    # 31.50 sec
+    def test_with_c_o_64_c_i_3_n_1_stride_1_and_padding_1(self):
+        n = 1
+        c_i = 3
+        h_i = 224
+        w_i = 224
+        x = np.arange(n * c_i * h_i * w_i).reshape(n, c_i, h_i, w_i).astype(np.float32)
+        c_o = 64
+        h_k = 3
+        w_k = 3
+        W = np.full(c_o * c_i * h_k * w_k, 2).reshape(c_o, c_i, h_k, w_k).astype(np.float32)
+
+        stride = 1
+        pad = 1
+
+        expected = convolution_2d(x, W, stride=stride, pad=pad).data.tolist()
+        actual = convolution_with_im2col(x.tolist(), W.tolist(), stride=stride, pad=pad)
+
+        self.__assert_eq_arrays(actual, expected, n, c_o, h_i, w_i, h_k, w_k, pad, stride)
+
     def test_assertion_error_with_too_large_kernel(self):
         n = 1
         c_i = 1
