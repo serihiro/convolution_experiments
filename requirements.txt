@@ -10,7 +10,7 @@ Babel==2.7.0
 backcall==0.1.0
 beautifulsoup4==4.7.1
 bibtexparser==1.1.0
-bleach==3.1.0
+bleach==3.1.1
 -e git+git@github.com:serihiro/bouncing_objects_generator.git@b9ed765067d5286c99e97465af54e77f24635d85#egg=bouncing_objects_generator
 certifi==2019.9.11
 chainer==5.3.0
