@@ -1,3 +1,2 @@
 """Init."""
 # NOQR
-import coveralls

@@ -1,7 +1,6 @@
 import math
 
 import numpy as np
-import time
 import pytest
 from chainer.functions.connection.convolution_2d import convolution_2d
 from my_convolution.src.my_convolution import convolution_with_im2col_and_gemm
