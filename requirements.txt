@@ -25,7 +25,7 @@ pytest==5.3.5
 pytest-cov==2.11.1
 requests==2.23.0
 six==1.12.0
-typing==3.6.6
+typing==3.7.4.3
 typing-extensions==3.7.4.3
 urllib3==1.25.8
 wcwidth==0.1.7
