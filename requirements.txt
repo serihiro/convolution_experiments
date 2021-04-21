@@ -23,7 +23,7 @@ pyflakes==2.3.1
 pyparsing==2.4.0
 pytest==5.3.5
 pytest-cov==2.11.1
-requests==2.23.0
+requests==2.25.1
 six==1.12.0
 typing==3.6.6
 typing-extensions==3.7.4.3
