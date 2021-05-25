@@ -16,7 +16,7 @@ more-itertools==8.7.0
 numpy==1.20.2
 packaging==20.9
 pluggy==0.13.1
-protobuf==3.16.0
+protobuf==3.17.1
 py==1.10.0
 pycodestyle==2.7.0
 pyflakes==2.3.1
