@@ -8,7 +8,7 @@ coveralls==3.0.1
 docopt==0.6.2
 entrypoints==0.3
 filelock==3.0.12
-flake8==3.9.1
+flake8==3.9.2
 idna==3.1
 importlib-metadata==4.6.0
 mccabe==0.6.1
